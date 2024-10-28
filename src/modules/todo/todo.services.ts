@@ -8,7 +8,7 @@ const createTodoIntoDB = async (payload: TTodo) => {
 
 const getAllTodosFromDB = async () => {
     // add the sort 
-  const result = await Todo.find();
+  const result = await Todo.find().sort({ status : 'descending'});
   return result;
 }
 

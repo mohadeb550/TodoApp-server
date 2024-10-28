@@ -1,4 +1,7 @@
-import express from 'express'
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+import express, { ErrorRequestHandler } from 'express'
 import router from './routes'
 import cors from 'cors'
 
@@ -18,6 +21,16 @@ app.use('/api', router)
 app.get('/', (req, res) => {
   res.send('Hello dev!')
 })
+
+// globar error handler 
+const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => { 
+  return res.status(500).json({
+    success: false,
+    message : err?.message,
+  });
+}
+
+app.use(globalErrorHandler)
 
 
 app.all('*', (req, res) => {
